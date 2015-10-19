@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlackJack.model.rules
 {
-    interface INewGameStrategy
+    interface INewGameStrategy 
     {
         bool NewGame(Deck a_deck, Dealer a_dealer, Player a_player);
     }

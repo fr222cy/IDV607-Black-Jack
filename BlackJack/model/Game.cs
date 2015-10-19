@@ -12,8 +12,11 @@ namespace BlackJack.model
 
         public Game()
         {
+
+
             m_dealer = new Dealer(new rules.RulesFactory());
             m_player = new Player();
+            
         }
 
         public bool IsGameOver()

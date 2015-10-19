@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="controller\PlayGame.cs" />
     <Compile Include="model\Card.cs" />
+    <Compile Include="model\CardDrawObserver.cs" />
     <Compile Include="model\Dealer.cs" />
     <Compile Include="model\Deck.cs" />
     <Compile Include="model\Game.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="model\rules\IHitStrategy.cs" />
     <Compile Include="model\rules\InternationalNewGameStrategy.cs" />
     <Compile Include="model\rules\INewGameStrategy.cs" />
+    <Compile Include="model\rules\NewGameBaseStrategy.cs" />
     <Compile Include="model\rules\RulesFactory.cs" />
     <Compile Include="model\rules\Soft17HitStrategy.cs" />
     <Compile Include="Program.cs" />

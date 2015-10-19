@@ -13,13 +13,18 @@ namespace BlackJack.model
         private rules.INewGameStrategy m_newGameRule;
         private rules.IHitStrategy m_hitRule;
         private rules.IDrawStrategy m_drawRule;
-        
+
+        private List<CardDrawObserver> m_observers;
 
         public Dealer(rules.RulesFactory a_rulesFactory)
         {
+            
             m_newGameRule = a_rulesFactory.GetNewGameRule();
             m_hitRule = a_rulesFactory.GetSoft17Rule(); // CHANGED RULE.
             m_drawRule = a_rulesFactory.GetDrawRule(); // RULE FOR PLAYER TO WIN ON DRAW.
+
+
+            m_observers = new List<CardDrawObserver>();
         }
 
         public bool NewGame(Player a_player)
@@ -38,12 +43,8 @@ namespace BlackJack.model
         {
             if (m_deck != null && a_player.CalcScore() < g_maxScore && !IsGameOver())
             {
-                
-                Card c;
-                c = m_deck.GetCard();
-                c.Show(true);
-                a_player.DealCard(c);
-                
+                DealPlayerCard(a_player);
+               
                 return true;
             }
             return false;
@@ -57,11 +58,8 @@ namespace BlackJack.model
                 this.ShowHand();
                 while(m_hitRule.DoHit(this))
                 {
-                    
-                    Card c = m_deck.GetCard();
-                    
-                    c.Show(true);
-                    DealCard(c);
+                    DealDealerCard();
+
                 }
                 return true;
             }
@@ -95,5 +93,45 @@ namespace BlackJack.model
             }
             return false;
         }
+        public void DealDealerCard()
+        {
+            Card c;
+            c = m_deck.GetCard();
+            c.Show(true);
+            
+           
+
+            this.DealCard(c);
+
+            foreach (CardDrawObserver o in m_observers)
+            {
+                o.cardDraw(c);
+            }
+        }
+
+        public void DealPlayerCard(Player p)
+        {
+            Card c;
+
+            c = m_deck.GetCard();
+            c.Show(true);
+
+          
+
+            p.DealCard(c);
+
+            foreach (CardDrawObserver o in m_observers)
+            {
+
+                o.cardDraw(c);
+            }
+        }
+
+        public void AddSubscribers(CardDrawObserver a_sub)
+        {
+            m_observers.Add(a_sub);
+        }
     }
+
+    
 }

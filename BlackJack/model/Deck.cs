@@ -54,5 +54,6 @@ namespace BlackJack.model
                 m_cards.Add(c);
             }
         }
+
     }
 }
