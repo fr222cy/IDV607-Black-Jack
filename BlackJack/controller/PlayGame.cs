@@ -50,7 +50,6 @@ namespace BlackJack.controller
         {
             Thread.Sleep(500);
             m_view.DisplayCard(card);
-
         }
     }
 }
