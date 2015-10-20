@@ -23,7 +23,6 @@ namespace BlackJack.model
             m_hitRule = a_rulesFactory.GetSoft17Rule(); // CHANGED RULE.
             m_drawRule = a_rulesFactory.GetDrawRule(); // RULE FOR PLAYER TO WIN ON DRAW.
 
-
             m_observers = new List<CardDrawObserver>();
         }
 

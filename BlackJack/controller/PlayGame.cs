@@ -3,15 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace BlackJack.controller
 {
     class PlayGame : model.CardDrawObserver
     {
-
-       
-
-        private int input;
 
         private view.IView m_view;
 
@@ -28,61 +25,30 @@ namespace BlackJack.controller
                 a_view.DisplayGameOver(a_game.IsDealerWinner());
             }
 
-            input = a_view.GetInput();
-
-            if (NewGame())
+            switch((view.Choices)a_view.GetInput())
             {
-                a_game.NewGame();
-            }
-            else if (Hit())
-            {
-                a_game.Hit();
-            
-                
-            }
-            else if (Stand())
-            {
-                a_game.Stand();
+                case view.Choices.Play:
+                    a_game.NewGame();
+                    break;
+                case view.Choices.Hit:
+                    a_game.Hit();
+                    break;
+                case view.Choices.Stand:
+                    a_game.Stand();
+                    break;
+                case view.Choices.Quit:
+                    return false;
 
-            }
-
-            return input != 'q';
-        }
-
-        public bool NewGame()
-        {
-
-            if (input == 'p')
-            {
-                return true;
+                default:
+                    break;
             }
 
-            return false;
-        }
-
-        public bool Hit()
-        {
-            if (input == 'h')
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool Stand()
-        {
-            if (input == 's')
-            {
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         public void cardDraw(Card card)
         {
-           
+            Thread.Sleep(500);
             m_view.DisplayCard(card);
 
         }

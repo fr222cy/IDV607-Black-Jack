@@ -19,6 +19,12 @@ namespace BlackJack.model
             
         }
 
+        public void AddSubscribers(CardDrawObserver a_sub)
+        {
+            m_dealer.AddSubscribers(a_sub);
+        }
+
+
         public bool IsGameOver()
         {
             return m_dealer.IsGameOver();
