@@ -10,11 +10,17 @@ namespace BlackJack.controller
     class PlayGame : model.CardDrawObserver
     {
 
+
         private view.IView m_view;
 
-        public bool Play(model.Game a_game, view.IView a_view)
+        public PlayGame(view.IView v)
         {
-            m_view = a_view;
+            m_view = v;
+        }
+              
+        public bool Play(model.Game a_game)
+        {
+            
             m_view.DisplayWelcomeMessage();
             
             m_view.DisplayDealerHand(a_game.GetDealerHand(), a_game.GetDealerScore());
@@ -22,10 +28,10 @@ namespace BlackJack.controller
 
             if (a_game.IsGameOver())
             {
-                a_view.DisplayGameOver(a_game.IsDealerWinner());
+                m_view.DisplayGameOver(a_game.IsDealerWinner());
             }
 
-            switch((view.Choices)a_view.GetInput())
+            switch((view.Choices)m_view.GetInput())
             {
                 case view.Choices.Play:
                     a_game.NewGame();

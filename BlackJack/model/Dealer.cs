@@ -94,11 +94,7 @@ namespace BlackJack.model
         }
         public void DealDealerCard()
         {
-            Card c;
-            c = m_deck.GetCard();
-            c.Show(true);
-            
-           
+            Card c = getCard();
 
             this.DealCard(c);
 
@@ -110,12 +106,7 @@ namespace BlackJack.model
 
         public void DealPlayerCard(Player p)
         {
-            Card c;
-
-            c = m_deck.GetCard();
-            c.Show(true);
-
-          
+            Card c = getCard();
 
             p.DealCard(c);
 
@@ -124,6 +115,16 @@ namespace BlackJack.model
 
                 o.cardDraw(c);
             }
+        }
+
+        public Card getCard()
+        {
+            Card c;
+
+            c = m_deck.GetCard();
+            c.Show(true);
+
+            return c;
         }
 
         public void AddSubscribers(CardDrawObserver a_sub)
